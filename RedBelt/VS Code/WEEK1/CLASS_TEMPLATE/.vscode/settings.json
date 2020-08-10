@@ -12,6 +12,7 @@
         "xutility": "cpp",
         "type_traits": "cpp",
         "iosfwd": "cpp",
-        "iostream": "cpp"
+        "iostream": "cpp",
+        "stdexcept": "cpp"
     }
 }
