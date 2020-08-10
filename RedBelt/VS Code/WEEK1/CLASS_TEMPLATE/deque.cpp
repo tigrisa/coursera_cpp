@@ -10,7 +10,7 @@ class Deque
     vector<T> back;
 
 public:
-    bool Empty() const
+    bool Empty() const12
     {
         return front.empty() && back.empty();
     }
