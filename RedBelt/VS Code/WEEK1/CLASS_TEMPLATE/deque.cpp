@@ -91,9 +91,8 @@ public:
 private:
     void throw_out_of_range(size_t pos)
     {
-        asd
 
-            string error = "out_of_range: " + to_string(pos) + " >= " + to_string(Size());
+        string error = "out_of_range: " + to_string(pos) + " >= " + to_string(Size());
 
         throw out_of_range(error);
     }
