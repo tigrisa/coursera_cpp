@@ -7,9 +7,14 @@
 using namespace std;
 
 template <typename Iterator>
-struct Page
+class Page
 {
   Iterator first, last;
+
+public:
+  Page(Iterator f, Iterator l) : first(f), last(l)
+  {
+  }
   Iterator begin() const
   {
     return first;
@@ -18,6 +23,11 @@ struct Page
   Iterator end() const
   {
     return last;
+  }
+
+  size_t size() const
+  {
+    return last - first;
   }
 };
 
@@ -37,17 +47,17 @@ public:
     do
     {
       page_last += page_size;
-      pages.push_back({first, page_last > last ? last : page_last});
+      pages.push_back(Page(first, page_last > last ? last : page_last));
       first += page_size;
     } while (page_last < last);
   }
 
-  Iterator begin() const
+  auto begin() const
   {
     return pages.begin();
   }
 
-  Iterator end() const
+  auto end() const
   {
     return pages.end();
   }
@@ -61,7 +71,7 @@ public:
 template <typename C>
 auto Paginate(C &c, size_t page_size)
 {
-  return Paginator{c.begin(), c.end(), page_size};
+  return Paginator(c.begin(), c.end(), page_size);
 }
 
 void TestPageCounts()
