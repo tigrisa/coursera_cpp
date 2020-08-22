@@ -1,0 +1,18 @@
+{
+    "files.associations": {
+        "initializer_list": "cpp",
+        "iterator": "cpp",
+        "map": "cpp",
+        "memory": "cpp",
+        "set": "cpp",
+        "vector": "cpp",
+        "xmemory": "cpp",
+        "xstring": "cpp",
+        "xtree": "cpp",
+        "xutility": "cpp",
+        "type_traits": "cpp",
+        "iosfwd": "cpp",
+        "iostream": "cpp",
+        "stdexcept": "cpp"
+    }
+}
