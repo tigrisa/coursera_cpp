@@ -48,7 +48,7 @@ void TestSorting()
   cout << big.size() << endl;
   sort(big.begin(), big.end(), Compare);
   ASSERT(is_sorted(big.begin(), big.end(),
-                   [](Student first, Student second) {
+                   [](const Student &first, const Student &second) {
                      return first.Less(second);
                    }));
 }
