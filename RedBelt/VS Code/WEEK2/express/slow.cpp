@@ -42,12 +42,16 @@ private:
 
 int main()
 {
-  LOG_DURATION("TOTAL");
+  ios::sync_with_stdio(false);
+  cin.tie(nullptr);
+
   RouteManager routes;
 
   int query_count;
   cin >> query_count;
 
+  vector<pair<int, int>> add;
+  vector<pair<int, int>> go;
   for (int query_id = 0; query_id < query_count; ++query_id)
   {
     string query_type;
@@ -56,13 +60,22 @@ int main()
     cin >> start >> finish;
     if (query_type == "ADD")
     {
-      routes.AddRoute(start, finish);
+      add.push_back(make_pair(start, finish));
     }
     else if (query_type == "GO")
     {
-      routes.FindNearestFinish(start, finish);
-      //cout << routes.FindNearestFinish(start, finish) << "\n";
+      go.push_back(make_pair(start, finish));
     }
+  }
+
+  LOG_DURATION("TOTAL");
+  for (const auto &a : add)
+  {
+    routes.AddRoute(a.first, a.second);
+  }
+  for (const auto &g : go)
+  {
+    cout << routes.FindNearestFinish(g.first, g.second) << "\n";
   }
 
   return 0;
