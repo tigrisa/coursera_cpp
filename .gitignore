@@ -19,3 +19,23 @@ RedBelt/VS Code/WEEK2/hotel/input.txt
 RedBelt/VS Code/WEEK4/input.txt
 RedBelt/VS Code/WEEK4/output.txt
 RedBelt/VS Code/WEEK4/test.cpp
+
+CMakeLists.txt.user
+CMakeCache.txt
+CMakeFiles
+CMakeScripts
+Testing
+Makefile
+cmake_install.cmake
+install_manifest.txt
+compile_commands.json
+CTestTestfile.cmake
+_deps
+RedBelt/VS Code/WEEK4/server_stats/build/CPackConfig.cmake
+RedBelt/VS Code/WEEK4/server_stats/build/CPackSourceConfig.cmake
+RedBelt/VS Code/WEEK4/server_stats/build/DartConfiguration.tcl
+RedBelt/VS Code/WEEK4/server_stats/build/.cmake/api/v1/query/client-vscode/query.json
+RedBelt/VS Code/WEEK4/server_stats/build/.cmake/api/v1/reply/cache-v2-ef88b145bd5437282a75.json
+RedBelt/VS Code/WEEK4/server_stats/build/.cmake/api/v1/reply/codemodel-v2-431592bbfe713c7b3dbb.json
+RedBelt/VS Code/WEEK4/server_stats/build/.cmake/api/v1/reply/index-2020-11-22T12-23-09-0014.json
+RedBelt/VS Code/WEEK4/server_stats/build/.cmake/api/v1/reply/target-server_stats-Debug-032ce0bd4f4f8f4dad15.json
