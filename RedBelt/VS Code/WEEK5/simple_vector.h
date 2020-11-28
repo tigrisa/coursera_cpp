@@ -111,3 +111,26 @@ private:
     std::copy(other.cbegin(), other.cend(), begin());
   }
 };
+
+/*Coursera version
+void operator=(const SimpleVector& rhs) {
+    if (rhs.size <= capacity) {
+      // У нас достаточно памяти - просто копируем элементы
+      copy(rhs.begin(), rhs.end(), begin());
+      size = rhs.size;
+    } else {
+      // Это так называемая идиома copy-and-swap.
+      // Мы создаём временный вектор с помощью
+      // конструктора копирования, а затем обмениваем его поля со своими.
+      // Так мы достигаем двух целей:
+      //  - избегаем дублирования кода в конструкторе копирования
+      //    и операторе присваивания
+      //  - обеспечиваем согласованное поведение конструктора копирования
+      //    и оператора присваивания
+      SimpleVector<T> tmp(rhs);
+      swap(tmp.data, data);
+      swap(tmp.size, size);
+      swap(tmp.capacity, capacity);
+    }
+  }
+*/
