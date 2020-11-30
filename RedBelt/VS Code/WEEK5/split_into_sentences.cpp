@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <list>
+#include <algorithm>
 
 using namespace std;
 
@@ -43,29 +44,60 @@ using Sentence = vector<Token>;
 //   return move(res);
 // }
 
+// template <typename Token>
+// vector<Sentence<Token>> SplitIntoSentences(vector<Token> tokens)
+// {
+//   vector<Sentence<Token>> res;
+
+//   auto it = tokens.begin();
+//   while (it != tokens.end())
+//   {
+//     Sentence<Token> sentence;
+//     while (it != tokens.end() && !it->IsEndSentencePunctuation())
+//     {
+//       sentence.push_back(move(*it));
+//       ++it;
+//     }
+//     while (it != tokens.end() && it->IsEndSentencePunctuation())
+//     {
+//       sentence.push_back(move(*it));
+//       ++it;
+//     }
+//     res.push_back(move(sentence));
+//   }
+
+//   return res;
+// }
+
+template <typename TokenForwardIt>
+TokenForwardIt FindSentenceEnd(TokenForwardIt tokens_begin, TokenForwardIt tokens_end)
+{
+  const TokenForwardIt before_sentence_end = adjacent_find(tokens_begin, tokens_end, [](const auto &left_token, const auto &right_token) {
+    return left_token.IsEndSentencePunctuation() && !right_token.IsEndSentencePunctuation();
+  });
+  return before_sentence_end == tokens_end ? tokens_end : next(before_sentence_end);
+}
+
 template <typename Token>
 vector<Sentence<Token>> SplitIntoSentences(vector<Token> tokens)
 {
-  vector<Sentence<Token>> res;
+  vector<Sentence<Token>> sentences;
 
-  auto it = tokens.begin();
-  while (it != tokens.end())
+  auto tokens_begin = begin(tokens);
+  const auto tokens_end = end(tokens);
+
+  while (tokens_begin != tokens_end)
   {
+    const auto sentence_end = FindSentenceEnd(tokens_begin, tokens_end);
     Sentence<Token> sentence;
-    while (it != tokens.end() && !it->IsEndSentencePunctuation())
+    for (; tokens_begin != sentence_end; ++tokens_begin)
     {
-      sentence.push_back(move(*it));
-      ++it;
+      sentence.push_back(move(*tokens_begin));
     }
-    while (it != tokens.end() && it->IsEndSentencePunctuation())
-    {
-      sentence.push_back(move(*it));
-      ++it;
-    }
-    res.push_back(move(sentence));
+    sentences.push_back(move(sentence));
   }
 
-  return res;
+  return sentences;
 }
 
 struct TestToken
