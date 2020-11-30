@@ -15,27 +15,52 @@ template <typename Token>
 using Sentence = vector<Token>;
 
 // Класс Token имеет метод bool IsEndSentencePunctuation() const
+// template <typename Token>
+// vector<Sentence<Token>> SplitIntoSentences(vector<Token> tokens)
+// {
+//   vector<Sentence<Token>> res;
+//   list<Token> list_tokens;
+//   for (auto &s : tokens)
+//     list_tokens.push_back(move(s));
+
+//   auto it = list_tokens.begin();
+//   while (it != list_tokens.end())
+//   {
+//     Sentence<Token> sentence;
+//     while (it != list_tokens.end() && !it->IsEndSentencePunctuation())
+//     {
+//       sentence.push_back(move(*it));
+//       it = list_tokens.erase(it);
+//     }
+//     while (it != list_tokens.end() && it->IsEndSentencePunctuation())
+//     {
+//       sentence.push_back(move(*it));
+//       it = list_tokens.erase(it);
+//     }
+//     res.push_back(move(sentence));
+//   }
+
+//   return move(res);
+// }
+
 template <typename Token>
 vector<Sentence<Token>> SplitIntoSentences(vector<Token> tokens)
 {
   vector<Sentence<Token>> res;
-  list<Token> list_tokens;
-  for (auto &s : tokens)
-    list_tokens.push_back(move(s));
 
-  auto it = list_tokens.begin();
-  while (it != list_tokens.end())
+  auto it = tokens.begin();
+  while (it != tokens.end())
   {
     Sentence<Token> sentence;
-    while (it != list_tokens.end() && !it->IsEndSentencePunctuation())
+    while (it != tokens.end() && !it->IsEndSentencePunctuation())
     {
       sentence.push_back(move(*it));
-      it = list_tokens.erase(it);
+      ++it;
     }
-    while (it != list_tokens.end() && it->IsEndSentencePunctuation())
+    while (it != tokens.end() && it->IsEndSentencePunctuation())
     {
       sentence.push_back(move(*it));
-      it = list_tokens.erase(it);
+      ++it;
     }
     res.push_back(move(sentence));
   }
@@ -56,9 +81,6 @@ struct TestToken
   {
     return data == other.data && is_end_sentence_punctuation == other.is_end_sentence_punctuation;
   }
-
-  TestToken(const TestToken &) = default;
-  TestToken(TestToken &&) = default;
 };
 
 ostream &operator<<(ostream &stream, const TestToken &token)
@@ -95,8 +117,8 @@ vector<TestToken> GenerateHeavyTokens()
   vector<TestToken> res;
   for (size_t i = 0; i < 500000; ++i)
   {
-    res.push_back({"Split"});
-    res.push_back({"!", true});
+    res.push_back(TestToken{"Split"});
+    res.push_back(TestToken{"!", true});
   }
 
   return res;
