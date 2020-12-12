@@ -70,18 +70,19 @@ public:
   {
     return capacity;
   }
-  void PushBack(T &&value)
+  void PushBack(T value)
   {
     if (capacity <= size)
     {
       evaluateCapacity();
       if (vector != nullptr)
       {
-        T *buf = new T[size];
+        T *buf = new T[capacity];
         std::move(vector, vector + size, buf);
-        //delete[] vector;
-        vector = new T[capacity];
-        std::move(buf, buf + size, vector);
+        delete[] vector;
+        // vector = new T[capacity];
+        // std::move(buf, buf + size, vector);
+        vector = buf;
       }
       else
         vector = new T[capacity];

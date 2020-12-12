@@ -31,7 +31,7 @@ void TestPushBack()
   SimpleVector<int> v;
   for (int i = 10; i >= 1; --i)
   {
-    v.PushBack(move(i));
+    v.PushBack(i);
     ASSERT(v.Size() <= v.Capacity());
   }
   sort(begin(v), end(v));
