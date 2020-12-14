@@ -40,10 +40,10 @@ void MergeSort(RandomIt range_begin, RandomIt range_end)
     return;
 
   // этот вектор вообще не нужен....
-  vector<typename RandomIt::value_type> elements(range_begin, range_end);
+  vector<typename RandomIt::value_type> elements(make_move_iterator(range_begin), make_move_iterator(range_end));
 
   size_t delim = elements.size() / 3;
-  RandomIt start1 = move_iterator(elements.begin());
+  RandomIt start1 = elements.begin();
   RandomIt start2 = start1 + delim;
   RandomIt start3 = start2 + delim;
 
@@ -52,8 +52,8 @@ void MergeSort(RandomIt range_begin, RandomIt range_end)
   MergeSort(start3, start3 + delim);
 
   vector<typename RandomIt::value_type> vec_buff;
-  std::merge(move_iterator(start1), move_iterator(start2), move_iterator(start2), move_iterator(start3), back_inserter(vec_buff));
-  std::merge(move_iterator(vec_buff.begin()), move_iterator(vec_buff.end()), move_iterator(start3), move_iterator(start3 + delim), range_begin);
+  std::merge(make_move_iterator(start1), make_move_iterator(start2), make_move_iterator(start2), make_move_iterator(start3), back_inserter(vec_buff));
+  std::merge(make_move_iterator(vec_buff.begin()), make_move_iterator(vec_buff.end()), make_move_iterator(start3), make_move_iterator(start3 + delim), range_begin);
   size_t i = 0;
 }
 
@@ -70,7 +70,7 @@ void TestIntVector()
   numbersNonCopy.push_back(NoncopyableInt(12));
   numbersNonCopy.push_back(NoncopyableInt(1));
   vector<int> numbers = {6, 1, 3, 9, 1, 9, 8, 12, 1};
-  MergeSort(move_iterator(begin(numbersNonCopy)), move_iterator(end(numbersNonCopy)));
+  MergeSort(begin(numbersNonCopy), end(numbersNonCopy));
   ASSERT(is_sorted(begin(numbersNonCopy), end(numbersNonCopy)));
 }
 
